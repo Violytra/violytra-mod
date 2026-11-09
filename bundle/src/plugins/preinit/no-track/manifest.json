@@ -1,0 +1,11 @@
+{
+  "id": "violytra.no-track",
+  "name": "No Track",
+  "description": "Disables Discord and Sentry analytics.",
+  "author": {
+    "name": "Violytra",
+    "links": [{ "url": "https://discord.com/invite/dtBTQHYSx4", "title": "Support Server" }]
+  },
+  "icon": "AnalyticsIcon",
+  "enabledByDefault": true
+}

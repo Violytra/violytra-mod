@@ -1,0 +1,11 @@
+{
+  "id": "violytra.user-badges",
+  "name": "User Badges",
+  "description": "Badges for Violytra contributors and sponsors.",
+  "author": {
+    "name": "Violytra",
+    "links": [{ "url": "https://discord.com/invite/dtBTQHYSx4", "title": "Support Server" }]
+  },
+  "icon": "ShieldUserIcon",
+  "essential": true
+}

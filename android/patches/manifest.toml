@@ -1,0 +1,5 @@
+[bundle]
+name = "violytra"
+author = "Violytra"
+description = "Violytra for Discord"
+format_version = 1

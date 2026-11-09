@@ -1,0 +1,11 @@
+{
+  "id": "violytra.api.hidden",
+  "name": "Developer Mode",
+  "description": "Exposes internal Violytra APIs for debugging.",
+  "author": {
+    "name": "Violytra",
+    "links": [{ "url": "https://discord.com/invite/dtBTQHYSx4", "title": "Support Server" }]
+  },
+  "icon": "WrenchIcon",
+  "enabledByDefault": "dev"
+}
