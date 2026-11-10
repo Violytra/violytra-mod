@@ -116,6 +116,7 @@ jobs:
 
       # Committed and tagged locally here, pushed only after the release exists
       - name: Prepare types
+        if: ${{ secrets.TYPES_PUSH_TOKEN != '' }}
         env:
           TYPES_PUSH_TOKEN: ${{ secrets.TYPES_PUSH_TOKEN }}
         run: |
@@ -225,4 +226,5 @@ jobs:
             dist/violytra.bundle dist/violytra.js dist/manifest.json
 
       - name: Publish types
+        if: ${{ secrets.TYPES_PUSH_TOKEN != '' }}
         run: git -C "$RUNNER_TEMP/types" push origin HEAD "refs/tags/$VERSION_NAME"
