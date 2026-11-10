@@ -1,0 +1,21 @@
+﻿name: Gen signing key
+on: workflow_dispatch
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install reseam
+        run: |
+          version=0.30.0
+          mkdir -p /tmp/reseam
+          curl -fsSL -o /tmp/reseam/reseam https://cdn.reseam.app/engine/v\/reseam-linux-x64
+          chmod +x /tmp/reseam/reseam
+          /tmp/reseam/reseam bundle keygen --out /tmp/reseam/bundle-signing.key
+      - name: Show public key
+        run: |
+          echo "PUBLIC_KEY=\"
+      - name: Upload private key
+        uses: actions/upload-artifact@v4
+        with:
+          name: signing-key
+          path: /tmp/reseam/bundle-signing.key
