@@ -116,13 +116,12 @@ jobs:
 
       # Committed and tagged locally here, pushed only after the release exists
       - name: Prepare types
-        if: ${{ secrets.TYPES_PUSH_TOKEN != '' }}
         env:
           TYPES_PUSH_TOKEN: ${{ secrets.TYPES_PUSH_TOKEN }}
         run: |
           if [ -z "$TYPES_PUSH_TOKEN" ]; then
-            echo "::error::The TYPES_PUSH_TOKEN secret is required to publish types."
-            exit 1
+            echo "::notice::TYPES_PUSH_TOKEN not set; skipping types publishing."
+            exit 0
           fi
 
           (
@@ -226,5 +225,11 @@ jobs:
             dist/violytra.bundle dist/violytra.js dist/manifest.json
 
       - name: Publish types
-        if: ${{ secrets.TYPES_PUSH_TOKEN != '' }}
-        run: git -C "$RUNNER_TEMP/types" push origin HEAD "refs/tags/$VERSION_NAME"
+        env:
+          TYPES_PUSH_TOKEN: ${{ secrets.TYPES_PUSH_TOKEN }}
+        run: |
+          if [ -z "$TYPES_PUSH_TOKEN" ]; then
+            echo "::notice::TYPES_PUSH_TOKEN not set; skipping types publish."
+            exit 0
+          fi
+          git -C "$RUNNER_TEMP/types" push origin HEAD "refs/tags/$VERSION_NAME"
