@@ -8,12 +8,12 @@ jobs:
         run: |
           version=0.30.0
           mkdir -p /tmp/reseam
-          curl -fsSL -o /tmp/reseam/reseam https://cdn.reseam.app/engine/v\/reseam-linux-x64
+          curl -fsSL -o /tmp/reseam/reseam https://cdn.reseam.app/engine/v${version}/reseam-linux-x64
           chmod +x /tmp/reseam/reseam
           /tmp/reseam/reseam bundle keygen --out /tmp/reseam/bundle-signing.key
       - name: Show public key
         run: |
-          echo "PUBLIC_KEY=\"
+          echo "PUBLIC_KEY=$(cat /tmp/reseam/bundle-signing.key.pub)"
       - name: Upload private key
         uses: actions/upload-artifact@v4
         with:
