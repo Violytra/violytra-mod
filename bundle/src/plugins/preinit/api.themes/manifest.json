@@ -1,10 +1,9 @@
-{
+﻿{
   "id": "violytra.api.themes",
   "name": "Themes API",
   "description": "This feature requires an update to be installed.",
   "author": {
-    "name": "Violytra",
-    "links": [{ "url": "https://discord.com/invite/dtBTQHYSx4", "title": "Support Server" }]
+    "name": "Violytra"
   },
   "icon": "PaintPaletteIcon",
   "version": "0.0.0",

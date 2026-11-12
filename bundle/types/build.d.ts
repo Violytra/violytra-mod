@@ -1,9 +1,7 @@
-// Type definitions for things in this codebase ONLY!
+﻿// Type definitions for things in this codebase ONLY!
 
 declare global {
     const __DEV__: boolean
-    const __BUILD_DISCORD_SERVER_URL__: string
-    const __BUILD_DONATE_URL__: string | undefined
     const __BUILD_SOURCE_REPOSITORY_URL__: string
     const __BUILD_DEFAULT_PLUGIN_REPOSITORY_URL__: string | undefined
     const __BUILD_LICENSE_URL__: string

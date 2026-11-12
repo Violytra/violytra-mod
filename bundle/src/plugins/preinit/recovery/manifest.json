@@ -1,10 +1,9 @@
-{
+﻿{
   "id": "violytra.recovery",
   "name": "Recovery",
   "description": "Handles errors and provides troubleshooting options for Violytra.",
   "author": {
-    "name": "Violytra",
-    "links": [{ "url": "https://discord.com/invite/dtBTQHYSx4", "title": "Support Server" }]
+    "name": "Violytra"
   },
   "icon": "ShieldIcon",
   "essential": true,

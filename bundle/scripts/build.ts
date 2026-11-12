@@ -1,4 +1,4 @@
-import dotenv from 'dotenv'
+﻿import dotenv from 'dotenv'
 
 // Reproducible builds only read the committed build.env, never local overrides.
 const Reproducible = process.argv.includes('--reproducible')
@@ -78,9 +78,6 @@ export default async function build(dev = Dev, log = true) {
         preserveEntrySignatures: false,
         transform: {
             define: {
-                __BUILD_DISCORD_SERVER_URL__: stringEnv(
-                    'VIOLYTRA_DISCORD_SERVER_URL',
-                ),
                 __BUILD_SOURCE_REPOSITORY_URL__: stringEnv(
                     'VIOLYTRA_SOURCE_REPOSITORY_URL',
                 ),

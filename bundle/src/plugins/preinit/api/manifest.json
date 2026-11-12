@@ -1,10 +1,9 @@
-{
+﻿{
   "id": "violytra.api",
   "name": "Plugin API",
   "description": "Provides the Violytra plugin API.",
   "author": {
-    "name": "Violytra",
-    "links": [{ "url": "https://discord.com/invite/dtBTQHYSx4", "title": "Support Server" }]
+    "name": "Violytra"
   },
   "icon": "PollsIcon",
   "essential": true,

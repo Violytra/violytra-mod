@@ -1,10 +1,9 @@
-{
+﻿{
   "id": "violytra.logging",
   "name": "Logging",
   "description": "Logs assisting Violytra developers.",
   "author": {
-    "name": "Violytra",
-    "links": [{ "url": "https://discord.com/invite/dtBTQHYSx4", "title": "Support Server" }]
+    "name": "Violytra"
   },
   "icon": "PaperIcon",
   "enabledByDefault": true,
