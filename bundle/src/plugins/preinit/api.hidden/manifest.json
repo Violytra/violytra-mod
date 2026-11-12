@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "violytra.api.hidden",
   "name": "Developer Mode",
   "description": "Exposes internal Violytra APIs for debugging.",
