@@ -25,7 +25,7 @@ else
 ViolytraTweak_FRAMEWORKS += ViolytraCore
 ViolytraTweak_CFLAGS += -F$(VIOLYTRA_CORE_FW)
 ViolytraTweak_CCFLAGS += -F$(VIOLYTRA_CORE_FW)
-ViolytraTweak_LDFLAGS += -F$(VIOLYTRA_CORE_FW) -Wl,-force_load,$(VIOLYTRA_CORE_FW)/ViolytraCore
+ViolytraTweak_LDFLAGS += -F$(VIOLYTRA_CORE_FW) -Wl,-force_load,$(VIOLYTRA_CORE_FW)/ViolytraCore.framework/ViolytraCore
 endif
 
 ifneq ($(VIOLYTRA_BUNDLE_DIR),)

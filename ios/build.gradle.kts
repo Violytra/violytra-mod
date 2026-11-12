@@ -8,7 +8,7 @@ val theosDir = providers.environmentVariable("THEOS")
     .orElse(providers.systemProperty("user.home").map { "$it/theos" })
 
 val coreFrameworkDir = rootProject.layout.projectDirectory
-    .dir("core/build/bin/iosArm64/debugFramework/ViolytraCore.framework")
+    .dir("core/build/bin/iosArm64/debugFramework")
 
 val coreStaticLib = rootProject.layout.projectDirectory
     .file("core/build/bin/iosArm64/debugStatic/libViolytraCore.a")
