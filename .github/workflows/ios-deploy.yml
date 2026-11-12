@@ -6,17 +6,18 @@ on:
     inputs:
       ipa_url:
         default: ""
-        description: "Direct link to the decrypted IPA"
-        required: true
+        description: "Direct link to the decrypted IPA (leave empty to build tweak only)"
+        required: false
         type: string
       release:
         description: "Release the build"
-        required: true
+        required: false
+        default: false
         type: boolean
       is_testflight:
         default: false
         description: "TestFlight build"
-        required: true
+        required: false
         type: boolean
   workflow_call:
     inputs:
@@ -140,7 +141,7 @@ jobs:
           path: ${{ env.ROOTLESS_DEB_PATH }}
 
   build-ipa:
-    if: inputs.caller_workflow != 'ci'
+    if: inputs.caller_workflow != 'ci' && (github.event.inputs.ipa_url || inputs.ipa_url) != ''
     runs-on: macos-15
     needs: build-tweak
 
@@ -206,6 +207,7 @@ jobs:
   release-app:
     if: |
       inputs.caller_workflow != 'ci' &&
+      (github.event.inputs.ipa_url || inputs.ipa_url) != '' &&
       (github.event.inputs.release == 'true' || inputs.release == true)
     runs-on: macos-15
     needs: build-ipa
