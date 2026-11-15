@@ -49,12 +49,16 @@ export function toPluginSystemErrorPayload(
     e: unknown,
 ): PluginSystemErrorPayload {
     if (isPluginSystemErrorPayload(e)) return e
-    if (e instanceof Error)
+    if (e instanceof Error) {
+        const source = isPluginSystemErrorPayload(e.cause) ? e.cause : undefined
+
         return {
-            code: PluginErrorCodes.PluginError,
-            message: e.message,
-            stack: e.stack,
+            code: source?.code ?? PluginErrorCodes.PluginError,
+            message: source?.message ?? e.message,
+            stack: source?.stack ?? e.stack,
+            details: source?.details,
         }
+    }
     return { code: PluginErrorCodes.PluginError, message: String(e) }
 }
 
