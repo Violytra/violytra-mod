@@ -17,8 +17,8 @@ android {
         applicationId = "app.violytra.xposed"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 10302
-        versionName = "1.3.2"
+        versionCode = 10303
+        versionName = "1.3.3"
     }
 
     sourceSets {
