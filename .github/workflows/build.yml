@@ -54,8 +54,18 @@ jobs:
           mkdir -p "$RUNNER_TEMP/reseam"
           version=$(sed -n 's/.*id("app.reseam.workspace") version "\(.*\)".*/\1/p' android/patches/settings.gradle.kts)
           if ! curl -fsSL -o "$RUNNER_TEMP/reseam/reseam" "https://cdn.reseam.app/engine/v$version/reseam-linux-x64"; then
-            echo "cdn.reseam.app unavailable, falling back to GitHub release binary"
-            curl -fsSL -o "$RUNNER_TEMP/reseam/reseam" "https://github.com/Reseam/reseam/releases/download/v1.0.1/reseam-linux-x64"
+            echo "cdn.reseam.app unavailable, building Reseam CLI v$version from source"
+            sudo apt-get update && sudo apt-get install -y --no-install-recommends build-essential pkg-config libssl-dev
+            curl -fsSL https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.98.1 --profile minimal -c rustfmt,clippy
+            source "$HOME/.cargo/env"
+            cargo install --git https://github.com/Reseam/boltffi.git --tag v0.31.0 boltffi-cli --locked
+            git clone --depth 1 --branch "v$version" https://github.com/Reseam/reseam.git "$RUNNER_TEMP/reseam-src"
+            pushd "$RUNNER_TEMP/reseam-src"
+            cargo xtask regen patch-api
+            cargo xtask runtime
+            cargo build --release -p reseam-cli
+            cp target/release/reseam "$RUNNER_TEMP/reseam/reseam"
+            popd
           fi
           chmod +x "$RUNNER_TEMP/reseam/reseam"
           "$RUNNER_TEMP/reseam/reseam" bundle keygen --out "$RUNNER_TEMP/reseam/bundle-signing.key"
