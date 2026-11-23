@@ -1,4 +1,4 @@
-import { ToastActionCreators } from '@violytra/discord/actions'
+﻿import { ToastActionCreators } from '@violytra/discord/actions'
 import {
     isPluginSystemErrorPayload,
     PluginErrorCodes,
@@ -45,27 +45,37 @@ async function updatePluginsWithRetries(ids: string[]) {
 registerInternalPlugin(manifest, {
     start({ plugin }) {
         ToastActionCreators.open('VIOLYTRA_THEMES_STUB_UPDATE', {
-            text: 'Downloading and installing updates for Theme plugins...',
+            text: 'Downloading and installing updates for Themes...',
         })
 
-        updatePluginsWithRetries([manifest.id, apiManifest.id])
-            .then(result => {
-                if (!result.errors.length) return
+        updatePluginsWithRetries([apiManifest.id, manifest.id]).then(result => {
+            if (!result.errors.length) {
+                const changed = result.installed.length + result.pending.length
+                if (changed > 0)
+                    ToastActionCreators.open('VIOLYTRA_THEMES_STUB_UPDATE_DONE', {
+                        text:
+                            result.pending.length > 0
+                                ? 'Themes updated. Reload the app to finish applying.'
+                                : 'Themes installed. Reload the app if Themes does not appear.',
+                    })
+                return
+            }
 
-                ToastActionCreators.open('VIOLYTRA_THEMES_STUB_UPDATE_ERRORS', {
-                    text: `Errors occurred while updating plugins: ${result.errors
-                        .map(e => `${e.id}: ${messageOf(e.error)}`)
-                        .join('\n')}`,
-                    variant: 'critical',
-                })
-
-                for (const error of result.errors) {
-                    plugin.reportError(
-                        new Error(`Failed to update plugin ${error.id}`, {
-                            cause: error.error,
-                        }),
-                    )
-                }
+            ToastActionCreators.open('VIOLYTRA_THEMES_STUB_UPDATE_ERRORS', {
+                text:
+                    'Could not install Themes updates. Update violytra.api.themes and violytra.settings.themes from the plugins repo, then reload.\n' +
+                    result.errors.map(e => `${e.id}: ${messageOf(e.error)}`).join('\n'),
+                variant: 'critical',
+                duration: 12000,
             })
+
+            for (const error of result.errors) {
+                plugin.reportError(
+                    new Error(`Failed to update plugin ${error.id}`, {
+                        cause: error.error,
+                    }),
+                )
+            }
+        })
     },
 })
