@@ -37,6 +37,7 @@ import {
     usePluginClaimsVersion,
 } from '../claims'
 import { InstalledPluginMasonryFlashList } from '../components/PluginList'
+import { showInstallFromUrlAlert } from '../components/PluginInstallUrlAlert'
 import PluginTooltipsProvider from '../components/TooltipProvider'
 import { RouteNames, Setting } from '../constants'
 import { pluralize } from '../utils/strings'
@@ -50,6 +51,7 @@ const { Stack, IconButton, FloatingActionButton, LayerScope, Card, Text } =
 
 const FiltersHorizontalIcon = getAssetIdByName('FiltersHorizontalIcon', 'png')!
 const SettingsIcon = getAssetIdByName('SettingsIcon')!
+const LinkIcon = getAssetIdByName('LinkIcon')!
 const PlusLargeIcon = getAssetIdByName('PlusLargeIcon')!
 
 export default function ViolytraPluginsSettingScreen() {
@@ -387,6 +389,12 @@ function Screen({ match, onBrowse }: Partial<PluginsPageProps>) {
                         clearable
                     />
                 </View>
+                <IconButton
+                    icon={LinkIcon}
+                    variant="tertiary"
+                    accessibilityLabel="Install plugin from URL"
+                    onPress={showInstallFromUrlAlert}
+                />
                 <IconButton
                     icon={FiltersHorizontalIcon}
                     variant={hasFilter ? 'primary' : 'tertiary'}

@@ -15,6 +15,11 @@ import app.violytra.plugins.pluginLog
 import app.violytra.xposed.*
 import app.violytra.xposed.api.HostScope
 import app.violytra.xposed.tweaks.plugins.*
+import io.ktor.client.call.body
+import io.ktor.client.plugins.timeout
+import io.ktor.client.request.get
+import io.ktor.client.request.onDownload
+import io.ktor.http.HttpStatusCode
 import java.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -164,4 +169,55 @@ private fun discardPendingInstalls(dataDir: String) {
     val paths = pluginPaths(dataDir)
     for (staged in pendingInstalls.values) discardStagedPlugin(paths, staged)
     pendingInstalls.clear()
+}
+
+/**
+ * Downloads a plugin ZIP from [url], stages it, and runs [onReady] with the same confirmation
+ * token flow as [promptInstallPlugin].
+ */
+context(host: HostScope)
+internal fun promptInstallFromUrl(
+    url: String,
+    installedVersion: (String) -> Version?,
+    requireInstallable: (String) -> Unit,
+    onReady: (Result<InstallPrompt>) -> Unit,
+) {
+    pluginJobScope.launch(Dispatchers.IO) {
+        val paths = pluginPaths(host.appInfo.dataDir)
+        val result = runCatching {
+            discardPendingInstalls(host.appInfo.dataDir)
+
+            val token = UUID.randomUUID().toString()
+            val response = httpClient.get(url) {
+                timeout { requestTimeoutMillis = 60_000L }
+            }
+            response.refusedHttpsDowngradeTarget()?.let {
+                throw PluginSystemError(
+                    PluginErrorCodes.INSTALL_FAILED,
+                    "$url redirects to insecure $it. The host should enforce HTTPS.",
+                )
+            }
+            if (response.status != HttpStatusCode.OK) {
+                throw PluginSystemError(
+                    PluginErrorCodes.INSTALL_FAILED,
+                    "Failed to download plugin: ${response.status}",
+                )
+            }
+            val bytes: ByteArray = response.body()
+
+            val staged = stagePluginZip(paths, "$CONFIRM_TMP_PREFIX$token") { it.write(bytes) }
+
+            try {
+                requireInstallable(staged.manifest.id)
+            } catch (e: Throwable) {
+                discardStagedPlugin(paths, staged)
+                throw e
+            }
+
+            pendingInstalls[token] = staged
+            InstallPrompt(token, staged.manifest, replaces = installedVersion(staged.manifest.id))
+        }.onFailure { pluginLog.e("Failed to stage plugin from $url", it) }
+
+        onReady(result)
+    }
 }

@@ -26,6 +26,7 @@ import app.violytra.xposed.runSuspendCatching
 import app.violytra.xposed.tweak
 import app.violytra.xposed.tweaks.plugins.external.InstallResult
 import app.violytra.xposed.tweaks.plugins.external.confirmPluginInstall
+import app.violytra.xposed.tweaks.plugins.external.promptInstallFromUrl
 import app.violytra.xposed.tweaks.plugins.external.promptInstallPlugin
 import app.violytra.xposed.tweaks.plugins.internal.InternalPluginFlags
 import app.violytra.xposed.tweaks.plugins.repos.*
@@ -40,6 +41,56 @@ val pluginInstallMethods by tweak {
         ) { result ->
             result.fold(
                 // Emit a ready event and wait for confirmation.
+                onSuccess = { prompt ->
+                    emitPluginEvent(
+                        PluginEvents.PLUGIN_INSTALL_FILE_READY,
+                        mapOf(
+                            "token" to prompt.token,
+                            "manifest" to mapOf(
+                                "id" to prompt.manifest.id,
+                                "name" to prompt.manifest.name,
+                                "description" to prompt.manifest.description,
+                                "author" to prompt.manifest.author,
+                                "version" to prompt.manifest.version,
+                                "icon" to prompt.manifest.icon?.let(::validatedPluginIcon),
+                            ),
+                            "replaces" to prompt.replaces?.toString(),
+                        ),
+                    )
+                },
+                onFailure = { e ->
+                    emitPluginEvent(
+                        PluginEvents.PLUGIN_INSTALL_RESULT,
+                        mapOf("error" to e.toPluginError(PluginErrorCodes.INSTALL_FAILED).toJSPayload()),
+                    )
+                },
+            )
+        }
+        null
+    }
+
+    /**
+     * `violytra.plugins.installUrl(url) -> null`
+     *
+     * Downloads a plugin ZIP from [url] and emits [PluginEvents.PLUGIN_INSTALL_FILE_READY]
+     * for JS to confirm via `confirmInstallFile`.
+     */
+    pluginSystemAsyncMethod("violytra.plugins.installUrl") { args ->
+        val url = args.getOrNull(0) as? String
+            ?: throw PluginSystemError(PluginErrorCodes.INVALID_ARGUMENT, "Expected a URL")
+        val parsed = runCatching { io.ktor.http.Url(url) }.getOrNull()
+            ?: throw PluginSystemError(PluginErrorCodes.INVALID_ARGUMENT, "Invalid URL")
+        if (parsed.protocol.name != "https" && parsed.protocol.name != "http") {
+            throw PluginSystemError(PluginErrorCodes.INVALID_ARGUMENT, "Only HTTP(S) URLs are supported")
+        }
+
+        SourcesStore.ensureLoaded(pluginPaths(appInfo.dataDir))
+        promptInstallFromUrl(
+            url = url,
+            installedVersion = { id -> pluginRegistry.factories[id]?.manifest?.version },
+            requireInstallable = ::requireReplaceable,
+        ) { result ->
+            result.fold(
                 onSuccess = { prompt ->
                     emitPluginEvent(
                         PluginEvents.PLUGIN_INSTALL_FILE_READY,

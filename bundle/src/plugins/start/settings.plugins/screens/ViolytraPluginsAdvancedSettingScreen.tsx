@@ -29,6 +29,7 @@ import { api } from '..'
 import { PluginIcon } from '../components/PluginIcon'
 import { RouteNames, Setting } from '../constants'
 import { addDefaultRepoIfNeeded, toConfig } from '../repos'
+import { showInstallFromUrlAlert } from '../components/PluginInstallUrlAlert'
 import { showErrorToast, showRemoveRepoConfirmation } from '../utils/alerts'
 import { formatBytes, messageOf, pluralize } from '../utils/strings'
 import { loadUpdates, nameOf, updatesStore } from '../utils/updates'
@@ -438,6 +439,12 @@ export default function ViolytraPluginsAdvancedSettingScreen() {
                                 )
                             }
                         /> : <></>}
+                        <TableRow
+                            icon={<TableRowAssetIcon name="LinkIcon" />}
+                            label="Install from URL"
+                            subLabel="Install a plugin from a direct ZIP link"
+                            onPress={showInstallFromUrlAlert}
+                        />
                         <TableRow
                             icon={<TableRowAssetIcon name="GlobeEarthIcon" />}
                             label="Restore default repository"
