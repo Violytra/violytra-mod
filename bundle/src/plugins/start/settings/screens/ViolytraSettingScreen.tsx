@@ -16,6 +16,8 @@ export default function ViolytraSettingScreen() {
                                 Setting.LoaderVersion,
                                 Setting.ViolytraSourceRepository,
                                 Setting.ViolytraLicense,
+                                Setting.ViolytraDiscord,
+                                Setting.ViolytraWebsite,
                             ],
                         },
                         {

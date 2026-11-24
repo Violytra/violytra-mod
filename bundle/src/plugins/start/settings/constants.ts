@@ -6,6 +6,7 @@ export const Setting = {
     // SUBSETTINGS
 
     ViolytraDiscord: 'ViolytraDiscord',
+    ViolytraWebsite: 'ViolytraWebsite',
     ViolytraSourceRepository: 'ViolytraSourceRepository',
     ViolytraLicense: 'ViolytraLicense',
     Reload: 'Reload',

@@ -1,4 +1,4 @@
-﻿import {
+import {
     registerSettingsItems,
     registerSettingsSection,
 } from '@violytra/discord/modules/settings'
@@ -9,14 +9,18 @@ import ReactNativeVersionSetting from './definitions/ReactNativeVersionSetting'
 import ReactVersionSetting from './definitions/ReactVersionSetting'
 import ReloadSetting from './definitions/ReloadSetting'
 import ViolytraDeveloperModeSetting from './definitions/ViolytraDeveloperModeSetting'
+import ViolytraDiscordSetting from './definitions/ViolytraDiscordSetting'
 import ViolytraLicenseSetting from './definitions/ViolytraLicenseSetting'
 import ViolytraSetting from './definitions/ViolytraSetting'
 import ViolytraSourceRepositorySetting from './definitions/ViolytraSourceRepositorySetting'
 import ViolytraVersionSetting from './definitions/ViolytraVersionSetting'
+import ViolytraWebsiteSetting from './definitions/ViolytraWebsiteSetting'
 
 registerSettingsItems({
     [Setting.Violytra]: ViolytraSetting,
     [Setting.ViolytraSourceRepository]: ViolytraSourceRepositorySetting,
+    [Setting.ViolytraDiscord]: ViolytraDiscordSetting,
+    [Setting.ViolytraWebsite]: ViolytraWebsiteSetting,
     [Setting.ViolytraLicense]: ViolytraLicenseSetting,
     [Setting.Reload]: ReloadSetting,
     [Setting.ViolytraDeveloperMode]: ViolytraDeveloperModeSetting,

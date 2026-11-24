@@ -58,5 +58,46 @@ registerInternalPlugin(manifest, {
 				}
 			},
 		})
+
+		plugin.api.themes.registerTheme(GROUP_ID, 'midnight', {
+			name: 'Violytra Midnight',
+			description: 'A deep AMOLED-black Violytra theme.',
+			getColors() {
+				return {
+					semantic: {
+						dark: {
+							'BACKGROUND_PRIMARY': '#0B0812',
+							'BACKGROUND_SECONDARY': '#050308',
+							'BACKGROUND_SECONDARY_ALT': '#0B0812',
+							'BACKGROUND_TERTIARY': '#050308',
+							'BACKGROUND_ACCENT': BRAND_DARK,
+							'BACKGROUND_FLOATING': '#141021',
+							'BACKGROUND_MOBILE_PRIMARY': '#0B0812',
+							'BACKGROUND_MOBILE_SECONDARY': '#050308',
+							'BACKGROUND_NESTED_FLOATING': '#0B0812',
+							'BACKGROUND_MODIFIER_ACCENT': 'rgba(124, 92, 252, 0.18)',
+							'BACKGROUND_MODIFIER_HOVER': 'rgba(124, 92, 252, 0.08)',
+							'BACKGROUND_MODIFIER_ACTIVE': 'rgba(124, 92, 252, 0.14)',
+							'BACKGROUND_MODIFIER_SELECTED': 'rgba(124, 92, 252, 0.22)',
+							'BRAND_260': BRAND_SOFT,
+							'BRAND_360': BRAND,
+							'BRAND_500': BRAND,
+							'BRAND_560': BRAND_DARK,
+							'TEXT_BRAND': BRAND_SOFT,
+							'TEXT_LINK': BRAND_SOFT,
+							'INTERACTIVE_ACTIVE': '#F2EEFF',
+							'INTERACTIVE_HOVER': '#DDD2FF',
+							'INTERACTIVE_NORMAL': '#A999D4',
+						},
+					},
+					raw: {
+						'BRAND_260': BRAND_SOFT,
+						'BRAND_360': BRAND,
+						'BRAND_500': BRAND,
+						'BRAND_560': BRAND_DARK,
+					},
+				}
+			},
+		})
 	},
 })
