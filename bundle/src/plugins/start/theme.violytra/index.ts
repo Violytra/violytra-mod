@@ -99,5 +99,93 @@ registerInternalPlugin(manifest, {
 				}
 			},
 		})
+
+		plugin.api.themes.registerTheme(GROUP_ID, 'ocean', {
+			name: 'Violytra Ocean',
+			description: 'A cool teal-blue Violytra theme.',
+			getColors() {
+				const accent = '#4CC9F0'
+				const accentDark = '#2F9EC2'
+				const accentSoft = '#8BE3FF'
+				return {
+					semantic: {
+						dark: {
+							'BACKGROUND_PRIMARY': '#0F1820',
+							'BACKGROUND_SECONDARY': '#091018',
+							'BACKGROUND_SECONDARY_ALT': '#0F1820',
+							'BACKGROUND_TERTIARY': '#091018',
+							'BACKGROUND_ACCENT': accentDark,
+							'BACKGROUND_FLOATING': '#152433',
+							'BACKGROUND_MOBILE_PRIMARY': '#0F1820',
+							'BACKGROUND_MOBILE_SECONDARY': '#091018',
+							'BACKGROUND_NESTED_FLOATING': '#0F1820',
+							'BACKGROUND_MODIFIER_ACCENT': 'rgba(76, 201, 240, 0.18)',
+							'BACKGROUND_MODIFIER_HOVER': 'rgba(76, 201, 240, 0.08)',
+							'BACKGROUND_MODIFIER_ACTIVE': 'rgba(76, 201, 240, 0.14)',
+							'BACKGROUND_MODIFIER_SELECTED': 'rgba(76, 201, 240, 0.22)',
+							'BRAND_260': accentSoft,
+							'BRAND_360': accent,
+							'BRAND_500': accent,
+							'BRAND_560': accentDark,
+							'TEXT_BRAND': accentSoft,
+							'TEXT_LINK': accentSoft,
+							'INTERACTIVE_ACTIVE': '#EAFBFF',
+							'INTERACTIVE_HOVER': '#CFF3FF',
+							'INTERACTIVE_NORMAL': '#9BC7D8',
+						},
+					},
+					raw: {
+						'BRAND_260': accentSoft,
+						'BRAND_360': accent,
+						'BRAND_500': accent,
+						'BRAND_560': accentDark,
+					},
+				}
+			},
+		})
+
+		plugin.api.themes.registerTheme(GROUP_ID, 'rose', {
+			name: 'Violytra Rose',
+			description: 'A warm rose Violytra theme.',
+			getColors() {
+				const accent = '#FF6FAE'
+				const accentDark = '#D94F8C'
+				const accentSoft = '#FFADD0'
+				return {
+					semantic: {
+						dark: {
+							'BACKGROUND_PRIMARY': '#1C1018',
+							'BACKGROUND_SECONDARY': '#140A12',
+							'BACKGROUND_SECONDARY_ALT': '#1C1018',
+							'BACKGROUND_TERTIARY': '#140A12',
+							'BACKGROUND_ACCENT': accentDark,
+							'BACKGROUND_FLOATING': '#281722',
+							'BACKGROUND_MOBILE_PRIMARY': '#1C1018',
+							'BACKGROUND_MOBILE_SECONDARY': '#140A12',
+							'BACKGROUND_NESTED_FLOATING': '#1C1018',
+							'BACKGROUND_MODIFIER_ACCENT': 'rgba(255, 111, 174, 0.18)',
+							'BACKGROUND_MODIFIER_HOVER': 'rgba(255, 111, 174, 0.08)',
+							'BACKGROUND_MODIFIER_ACTIVE': 'rgba(255, 111, 174, 0.14)',
+							'BACKGROUND_MODIFIER_SELECTED': 'rgba(255, 111, 174, 0.22)',
+							'BRAND_260': accentSoft,
+							'BRAND_360': accent,
+							'BRAND_500': accent,
+							'BRAND_560': accentDark,
+							'TEXT_BRAND': accentSoft,
+							'TEXT_LINK': accentSoft,
+							'INTERACTIVE_ACTIVE': '#FFF0F6',
+							'INTERACTIVE_HOVER': '#FFD6E7',
+							'INTERACTIVE_NORMAL': '#D8A7BE',
+						},
+					},
+					raw: {
+						'BRAND_260': accentSoft,
+						'BRAND_360': accent,
+						'BRAND_500': accent,
+						'BRAND_560': accentDark,
+					},
+				}
+			},
+		})
 	},
 })

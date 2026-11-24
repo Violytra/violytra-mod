@@ -18,6 +18,8 @@ export default function ViolytraSettingScreen() {
                                 Setting.ViolytraLicense,
                                 Setting.ViolytraDiscord,
                                 Setting.ViolytraWebsite,
+                                Setting.ViolytraPlugins,
+                                Setting.ViolytraChangelog,
                             ],
                         },
                         {

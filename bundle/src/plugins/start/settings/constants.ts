@@ -7,6 +7,8 @@ export const Setting = {
 
     ViolytraDiscord: 'ViolytraDiscord',
     ViolytraWebsite: 'ViolytraWebsite',
+    ViolytraPlugins: 'ViolytraPlugins',
+    ViolytraChangelog: 'ViolytraChangelog',
     ViolytraSourceRepository: 'ViolytraSourceRepository',
     ViolytraLicense: 'ViolytraLicense',
     Reload: 'Reload',
