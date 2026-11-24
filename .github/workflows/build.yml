@@ -58,6 +58,7 @@ jobs:
             sudo apt-get update && sudo apt-get install -y --no-install-recommends build-essential pkg-config libssl-dev
             curl -fsSL https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.98.1 --profile minimal -c rustfmt,clippy
             source "$HOME/.cargo/env"
+            export CARGO_NET_GIT_FETCH_WITH_CLI=true
             cargo install --git https://github.com/Reseam/boltffi.git --tag v0.31.0 boltffi-cli --locked
             git clone --depth 1 --branch "v$version" https://github.com/Reseam/reseam.git "$RUNNER_TEMP/reseam-src"
             pushd "$RUNNER_TEMP/reseam-src"
