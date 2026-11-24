@@ -63,7 +63,7 @@ jobs:
             export GIT_TERMINAL_PROMPT=0
             export GIT_CONFIG_NOSYSTEM=1
             export GIT_CONFIG_GLOBAL=/dev/null
-            cargo install --git https://github.com/Reseam/boltffi.git --tag v0.31.0 boltffi-cli --locked
+            cargo install --git https://github.com/boltffi/boltffi.git --tag v0.31.0 boltffi_cli --locked
             git clone --depth 1 --branch "v$version" https://github.com/Reseam/reseam.git "$RUNNER_TEMP/reseam-src"
             pushd "$RUNNER_TEMP/reseam-src"
             cargo xtask regen patch-api
