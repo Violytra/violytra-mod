@@ -59,7 +59,7 @@ private fun PluginManifest.withReservedDependencies(): PluginManifest {
 }
 
 internal val internalPlugins: List<PluginFactory> by lazy {
-    listOf(apiProviderPlugin, discordProviderPlugin, recoveryPlugin, noTrackPlugin, preventOtaUpdatesPlugin)
+    listOf(apiProviderPlugin, discordProviderPlugin, recoveryPlugin, noTrackPlugin, preventOtaUpdatesPlugin, internalThemesPlugin)
 }
 
 /** Native internal plugins and bundled (JS-only) ones from [bundleManifest]. */

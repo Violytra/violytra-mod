@@ -1,12 +1,20 @@
 {
   "id": "violytra.settings.themes",
   "name": "Themes",
-  "description": "This feature requires an update to be installed.",
+  "description": "Color themes, font packs, icon packs, and emoji packs.",
   "author": {
     "name": "Violytra"
   },
   "icon": "PaintPaletteIcon",
-  "version": "0.0.0",
   "enabledByDefault": true,
-  "defaultSource": true
+  "dependencies": {
+    "violytra.api": {
+      "version": ">=1 <2"
+    },
+    "violytra.settings": {},
+    "violytra.api.themes": {
+      "version": ">=1 <2"
+    },
+    "violytra.settings.plugins": {}
+  }
 }
