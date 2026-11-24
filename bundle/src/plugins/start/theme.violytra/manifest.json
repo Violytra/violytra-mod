@@ -1,0 +1,15 @@
+{
+  "id": "violytra.theme.violytra",
+  "name": "Violytra Theme",
+  "description": "Violytra's signature color theme.",
+  "author": {
+    "name": "Violytra"
+  },
+  "icon": "PaintPaletteIcon",
+  "enabledByDefault": true,
+  "dependencies": {
+    "violytra.api.themes": {
+      "version": ">=1 <2"
+    }
+  }
+}
