@@ -31,9 +31,8 @@ registerInternalPlugin<{ jsonStorage: Settings }>(manifest, {
 		settings.claimPlugins(isThemePlugin)
 		cleanup(
 			onSettingsModulesLoaded(() => {
-				import('./register').then(({ default: register }) =>
-					cleanup(register()),
-				)
+				// @as-require
+				import('./register')
 			}),
 		)
 

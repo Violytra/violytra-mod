@@ -1,5 +1,5 @@
 import { RouteNames, Setting } from '../constants'
-import * as ViolytraThemesKindSettingScreen from '../screens/ViolytraThemesKindSettingScreen'
+import defer * as ViolytraThemesKindSettingScreen from '../screens/ViolytraThemesKindSettingScreen'
 import type { SettingsItem } from '@violytra/discord/modules/settings'
 
 /** Groups offering a specific theme kind. Opened from dashboard tile; omitted from main settings list. */
