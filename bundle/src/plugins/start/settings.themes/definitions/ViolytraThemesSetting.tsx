@@ -1,6 +1,6 @@
 import TableRowAssetIcon from '@violytra/components/TableRowAssetIcon'
 import { RouteNames, Setting } from '../constants'
-import * as ViolytraThemesSettingScreen from '../screens/ViolytraThemesSettingScreen'
+import defer * as ViolytraThemesSettingScreen from '../screens/ViolytraThemesSettingScreen'
 import type { SettingsItem } from '@violytra/discord/modules/settings'
 
 const ViolytraThemesSetting: SettingsItem = {

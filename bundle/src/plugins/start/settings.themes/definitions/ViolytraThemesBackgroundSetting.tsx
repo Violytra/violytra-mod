@@ -1,5 +1,5 @@
 import { RouteNames, Setting } from '../constants'
-import * as ViolytraThemesBackgroundSettingScreen from '../screens/ViolytraThemesBackgroundSettingScreen'
+import defer * as ViolytraThemesBackgroundSettingScreen from '../screens/ViolytraThemesBackgroundSettingScreen'
 import type { SettingsItem } from '@violytra/discord/modules/settings'
 
 /** Background overrides. Opened from the Colors page; omitted from main settings list. */

@@ -1,6 +1,6 @@
 import { TableRowAssetIcon } from '@violytra/components'
 import { RouteNames, Setting } from '../constants'
-import * as ViolytraThemesBrowseSettingScreen from '../screens/ViolytraThemesBrowseSettingScreen'
+import defer * as ViolytraThemesBrowseSettingScreen from '../screens/ViolytraThemesBrowseSettingScreen'
 import type { SettingsItem } from '@violytra/discord/modules/settings'
 
 /** Repository theme plugins page. Opened from Themes screen; omitted from main settings list. */
